@@ -1,4 +1,4 @@
-<div class="bg-white rounded-lg shadow-lg p-3 relative">
+<a href="{{ route('product_detail') }}" class="bg-white rounded-lg shadow-lg p-3 relative">
     <img class="mx-auto" src="{{ asset('dd4you/dpanel/images/product-1.png') }}" alt="">
 
     <div class="flex justify-between gap-3 my-3">
@@ -19,7 +19,6 @@
             <span class="flex justify-center items-center w-5 h5 rounded-full border border-gray-400">S</span>
             <span class="flex justify-center items-center w-5 h5 rounded-full border border-gray-400">M</span>
             <span class="flex justify-center items-center w-5 h5 rounded-full border border-gray-400">L</span>
-
         </div>
     </div>
     <div class="flex justify-between items-center">
@@ -33,4 +32,4 @@
         <span class="bg-white shadow-md rounded-full w-7 h-7 flex items-center justify-center"><i
                 class='bx bx-heart text-xl'></i></span>
     </div>
-</div>
+</a>
