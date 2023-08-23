@@ -7,7 +7,7 @@
 @section('body_content')
     <section class="px-6 md:px-20 mt-6 min-h-screen">
 
-        <h1 class="text-5xl font-bold text-center drop-shadow-md text-black py-16">Shopping Cart</h1>
+        <h1 class="text-5xl font-bold text-center drop-shadow-md text-black py-12">Shopping Cart</h1>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 

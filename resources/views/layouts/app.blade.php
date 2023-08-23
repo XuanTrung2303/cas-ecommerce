@@ -22,9 +22,9 @@
         <a href="/"><img src="{{ asset('dd4you/dpanel/images/logo.jfif') }}" alt="LOGO"
                 style="width: 160px;height:100px"></a>
         <div class="text-2xl relative">
-            <i class='bx bx-heart'></i>
+            <a href="{{ route('wishlist') }}"><i class='bx bx-heart'></i></a>
             <i class='bx bx-user'></i>
-            <i class='bx bx-cart'></i>
+            <a href="{{ route('cart') }}"><i class='bx bx-cart'></i></a>
             <span
                 class="absolute top-0 -right-2.5 bg-indigo-600 rounded-full w-4 h-4 text-xs text-white text-center">0</span>
         </div>
