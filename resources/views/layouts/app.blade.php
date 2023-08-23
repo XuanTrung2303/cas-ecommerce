@@ -19,7 +19,8 @@
 
 <body class="bg-[#FBFBFB]">
     <div class="flex justify-between px-6 md:px-20 items-center mt-4 bg-white shadow py-2">
-        <img src="{{ asset('dd4you/dpanel/images/logo.jfif') }}" alt="LOGO" style="width: 160px;height:100px">
+        <a href="/"><img src="{{ asset('dd4you/dpanel/images/logo.jfif') }}" alt="LOGO"
+                style="width: 160px;height:100px"></a>
         <div class="text-2xl relative">
             <i class='bx bx-heart'></i>
             <i class='bx bx-user'></i>

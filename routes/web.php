@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::view('/pd/slug', 'product_detail')->name('product_detail');
+Route::view('/products', 'products')->name('products');

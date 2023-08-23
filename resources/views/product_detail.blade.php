@@ -27,26 +27,15 @@
 
             document.getElementById('bigImage').src = arr[currentImage];
         }
-
-        // const selectColor = (c) => {
-        //     window.location.href = generateUrl({
-        //         c
-        //     });
-        // }
-        // const selectSize = (s) => {
-        //     window.location.href = generateUrl({
-        //         s
-        //     });
-        // }
     </script>
 @endpush
 
 @section('body_content')
     <section class="px-6 md:px-20 mt-6">
-        <div class="flex gap-6">
+        <div class="flex flex-wrap md:flex-nowrap gap-6">
             {{-- left --}}
-            <div class="shrink-0 flex gap-4">
-                <div id="images" class="flex flex-col gap-3 max-h-96 overflow-y-auto">
+            <div class="shrink-0 w-full md:w-auto flex flex-col-reverse md:flex-row gap-4">
+                <div id="images" class="flex md:flex-col gap-3 pb-1 md:pb-0 max-h-96 overflow-y-auto">
                     @foreach (range(1, 4) as $item)
                         <div onclick="viewImage(this, '{{ $loop->index }}')"
                             class="bg-white rounded-md shadow p-1 cursor-pointer">
