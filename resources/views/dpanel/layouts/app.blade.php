@@ -32,10 +32,14 @@
 
     <x-dpanel::sidebar.container name="DD Admin">
 
-        <x-dpanel::sidebar.item name="Dashboard" icon="bx-home" url="{{ route(config('dpanel.prefix') . '.dashboard') }}"
+        <x-dpanel::sidebar.item name="Dashboard" icon="bx-home"
+            url="{{ route(config('dpanel.prefix') . '.dashboard') }}"
             isActive="{{ request()->segment(2) == 'dashboard' }}" />
 
-        <x-dpanel::sidebar.dropdown name="Menu 1" icon="bx-menu" isActive="{{ request()->segment(2) == 'menu-1' }}">
+        <x-dpanel::sidebar.item name="Categories" icon="bx-category" url="{{ route('dpanel.category.index') }}"
+            isActive="{{ request()->segment(2) == 'menu-2' }}" />
+
+        {{-- <x-dpanel::sidebar.dropdown name="Menu 1" icon="bx-menu" isActive="{{ request()->segment(2) == 'menu-1' }}">
 
             <x-dpanel::sidebar.dropdown-item name="Submenu 1" url="" isActive="{{ false }}" />
             <x-dpanel::sidebar.dropdown-item name="Submenu 2" url="" isActive="{{ true }}" />
@@ -43,14 +47,13 @@
 
         </x-dpanel::sidebar.dropdown>
 
-        <x-dpanel::sidebar.item name="Menu 2" icon="bx-menu" url=""
-            isActive="{{ request()->segment(2) == 'menu-2' }}" />
+
         <x-dpanel::sidebar.item name="Menu 3" icon="bx-menu" url=""
             isActive="{{ request()->segment(2) == 'menu-2' }}" />
         <x-dpanel::sidebar.item name="Menu 4" icon="bx-menu" url=""
             isActive="{{ request()->segment(2) == 'menu-2' }}" />
         <x-dpanel::sidebar.item name="Menu 5" icon="bx-menu" url=""
-            isActive="{{ request()->segment(2) == 'menu-2' }}" />
+            isActive="{{ request()->segment(2) == 'menu-2' }}" /> --}}
 
         {{-- Global Settings Menu --}}
         @if (Schema::hasTable('global_settings'))
