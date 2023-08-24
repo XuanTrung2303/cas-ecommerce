@@ -64,7 +64,7 @@
 
     {{-- Charts --}}
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+    {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         @php
             $columnName1 = $chart['column']['name'];
             $columnData1 = $chart['column']['data'];
@@ -89,7 +89,7 @@
             chartRootItem="{{ array_keys($chart['tree']['data'][0])[0] }}" :chartData="$treeData1" />
 
 
-    </div>
+    </div> --}}
     {{-- Charts End --}}
 
     {{-- Bottom Sheet --}}
