@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Dpanel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Color;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class ColorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Category::paginate(20);
+        $data = Color::all();
 
-        return view('dpanel.category', compact('data'));
+        return view('dpanel.color', compact('data'));
     }
 
     /**
@@ -33,15 +33,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|unique:colors',
+            'code' => 'required|unique:colors',
         ]);
 
-        $data = new Category();
+        $data = new Color();
         $data->name = $request->name;
-        $data->slug = Str::slug($request->name);
+        $data->code = $request->code;
+        $data->is_active = true;
         $data->save();
 
-        return back()->withSuccess('New Category added Successfully');
+        return back()->withSuccess('New Color added Successfully');
     }
 
     /**
@@ -66,16 +68,17 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,' . $id
+            'name' => 'required|unique:colors,name,' . $id,
+            'code' => 'required|unique:colors,code,' . $id,
         ]);
 
-        $data = Category::find($id);
+        $data = Color::find($id);
         $data->name = $request->name;
-        $data->slug = Str::slug($request->name);
+        $data->code = $request->code;
         $data->is_active = $request->is_active;
         $data->save();
 
-        return back()->withSuccess('Category updated  Successfully');
+        return back()->withSuccess('Color updated  Successfully');
     }
 
     /**

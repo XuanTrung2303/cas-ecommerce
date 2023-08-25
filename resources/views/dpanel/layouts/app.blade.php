@@ -38,6 +38,12 @@
 
         <x-dpanel::sidebar.item name="Categories" icon="bx-category" url="{{ route('dpanel.category.index') }}"
             isActive="{{ request()->segment(2) == 'menu-2' }}" />
+        <x-dpanel::sidebar.item name="Brands" icon="bx-category" url="{{ route('dpanel.brand.index') }}"
+            isActive="{{ request()->segment(2) == 'menu-2' }}" />
+        <x-dpanel::sidebar.item name="Sizes" icon="bx-category" url="{{ route('dpanel.size.index') }}"
+            isActive="{{ request()->segment(2) == 'menu-2' }}" />
+        <x-dpanel::sidebar.item name="Colors" icon="bx-category" url="{{ route('dpanel.color.index') }}"
+            isActive="{{ request()->segment(2) == 'menu-2' }}" />
 
         {{-- <x-dpanel::sidebar.dropdown name="Menu 1" icon="bx-menu" isActive="{{ request()->segment(2) == 'menu-1' }}">
 

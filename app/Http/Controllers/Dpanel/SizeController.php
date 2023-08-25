@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Dpanel;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class SizeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Category::paginate(20);
+        $data = Size::all();
 
-        return view('dpanel.category', compact('data'));
+        return view('dpanel.size', compact('data'));
     }
 
     /**
@@ -33,15 +33,17 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|unique:categories'
+            'name' => 'required|unique:sizes',
+            'code' => 'required|unique:sizes',
         ]);
 
-        $data = new Category();
+        $data = new Size();
         $data->name = $request->name;
-        $data->slug = Str::slug($request->name);
+        $data->code = $request->code;
+        $data->is_active = true;
         $data->save();
 
-        return back()->withSuccess('New Category added Successfully');
+        return back()->withSuccess('New Size added Successfully');
     }
 
     /**
@@ -66,16 +68,17 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|unique:categories,name,' . $id
+            'name' => 'required|unique:sizes,name,' . $id,
+            'code' => 'required|unique:sizes,code,' . $id
         ]);
 
-        $data = Category::find($id);
+        $data = Size::find($id);
         $data->name = $request->name;
-        $data->slug = Str::slug($request->name);
+        $data->code = $request->code;
         $data->is_active = $request->is_active;
         $data->save();
 
-        return back()->withSuccess('Category updated  Successfully');
+        return back()->withSuccess('Size updated  Successfully');
     }
 
     /**
