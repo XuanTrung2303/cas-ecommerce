@@ -167,7 +167,7 @@
                         <label>&nbsp;</label>
                         <button
                             class="w-full bg-violet-500 text-center text-white py-1 px-2 rounded shadow-md uppercase font-bold">
-                            Update Color
+                            Update Size
                         </button>
                     </div>
                 </div>
