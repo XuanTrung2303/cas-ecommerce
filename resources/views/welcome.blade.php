@@ -52,11 +52,13 @@
         </div>
     </div>
 
-    <section class="px-6 md:px-20 mt-8">
+    <section class="px-6 md:px-20 mt-6">
         <h3 class="text-gray-800 font-medium mb-2">Flash Sale</h3>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            @foreach (range(1, 4) as $item)
-                <x-product.card1 />
+            @foreach ($products as $item)
+                @if ($item->variant->isNotEmpty())
+                    <x-product.card1 :product="$item" />
+                @endif
             @endforeach
         </div>
     </section>
@@ -87,8 +89,10 @@
             <a href="{{ route('products') }}" class="text-violet-800 font-medium mb-2">All Product</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-            @foreach (range(1, 12) as $item)
-                <x-product.card1 />
+            @foreach ($products as $item)
+                @if ($item->variant->isNotEmpty())
+                    <x-product.card1 :product="$item" />
+                @endif
             @endforeach
         </div>
     </section>

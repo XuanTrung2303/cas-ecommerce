@@ -20,4 +20,14 @@ class Variant extends Model
         'selling_price',
         'stock'
     ];
+
+    public function color()
+    {
+        return $this->belongsTo(Color::class);
+    }
+
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
+    }
 }
