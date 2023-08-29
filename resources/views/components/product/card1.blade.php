@@ -29,7 +29,10 @@
         </span>
     </div>
     <div class="absolute top-2 left-3 right-3 flex justify-between items-center">
-        <span class="bg-red-500 text-white rounded px-2 text-xs">25% Off</span>
+        @php
+            $discount = (($product->variant[0]->mrp - $product->variant[0]->selling_price) / $product->variant[0]->mrp) * 100;
+        @endphp
+        <span class="bg-red-500 text-white rounded px-2 text-xs">{{ round($discount, 2) }}% Off</span>
         <span class="bg-white shadow-md rounded-full w-7 h-7 flex items-center justify-center"><i
                 class='bx bx-heart text-xl'></i></span>
     </div>

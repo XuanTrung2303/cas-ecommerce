@@ -171,19 +171,21 @@ class ProductController extends Controller
         }
 
         // Update Image
-        foreach ($request->images as $key => $image) {
+        if ($request->images) {
+            foreach ($request->images as $key => $image) {
 
-            if (isset($request->image_ids[$key])) {
-                $productImage = ProductImage::find($request->image_ids[$key]);
-                Storage::disk('public')->delete($productImage->path);
-                $productImage->path = $image->store('media', 'public');
-                $productImage->save();
-            } else {
-                $productImage = new ProductImage;
-                $productImage->product_id = $product->id;
-                $productImage->path = $image->store('media', 'public');
-                $productImage->save();
-            }
+                if (isset($request->image_ids[$key])) {
+                    $productImage = ProductImage::find($request->image_ids[$key]);
+                    Storage::disk('public')->delete($productImage->path);
+                    $productImage->path = $image->store('media', 'public');
+                    $productImage->save();
+                } else {
+                    $productImage = new ProductImage;
+                    $productImage->product_id = $product->id;
+                    $productImage->path = $image->store('media', 'public');
+                    $productImage->save();
+                }
+            } # code...
         }
 
         return redirect()->route('dpanel.product.index')->withSuccess('Product Updated Successfully');
