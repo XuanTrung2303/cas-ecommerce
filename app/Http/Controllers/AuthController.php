@@ -42,7 +42,8 @@ class AuthController extends Controller
         if ($validator->fails()) return response()->json($validator->messages(), 401);
 
         $user = new User;
-        $user->name = $request->firs_name . '' . $request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();

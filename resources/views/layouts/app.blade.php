@@ -10,7 +10,7 @@
     <!-- Fonts -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-
+    <link rel="stylesheet" href="{{ asset('dd4you/dpanel/js/cute-alert/style.css') }}">
 
     @stack('css')
     <!-- Styles -->
@@ -24,7 +24,7 @@
         <div class="text-2xl relative">
             <a href="{{ route('wishlist') }}"><i class='bx bx-heart'></i></a>
             @auth
-                <a href="{{ route('account') }}"><i class='bx bx-user'></i></a>
+                <a href="{{ route('account.index') }}"><i class='bx bx-user'></i></a>
             @else
                 <button type="button" onclick="toggleLoginPopup()"><i class='bx bx-user'></i></button>
             @endauth
@@ -154,8 +154,37 @@
     </footer>
 
     @vite('resources/js/app.js')
+    <script src="{{ asset('dd4you/dpanel/js/cute-alert/cute-alert.js') }}"></script>
     <script src="{{ asset('dd4you/dpanel/js/jquery-3.6.1.min.js') }}"></script>
     <script>
+        @if (Session::has('success'))
+            cuteToast({
+                type: "success",
+                message: "{{ session('success') }}",
+            })
+        @endif
+
+        @if (Session::has('error'))
+            cuteToast({
+                type: "error",
+                message: "{{ session('error') }}",
+            })
+        @endif
+
+        @if (Session::has('info'))
+            cuteToast({
+                type: "info",
+                message: "{{ session('info') }}",
+            })
+        @endif
+
+        @if (Session::has('warning'))
+            cuteToast({
+                type: "warning",
+                message: "{{ session('warning') }}",
+            })
+        @endif
+
         const toggleForms = (id) => {
             let loginForm = document.getElementById('login');
             let registerForm = document.getElementById('register');
