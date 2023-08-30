@@ -35,7 +35,7 @@
                 </li>
                 <li id="nav-orders" onclick="activeTab('orders')" class="cursor-pointer">My Orders</li>
                 <li id="nav-address" onclick="activeTab('address')" class="cursor-pointer">My Address</li>
-                {{-- <li>Account Settings</li> --}}
+                <li><a href="{{ route('logout') }}" class="flex">Logout</a></li>
             </ul>
         </div>
 

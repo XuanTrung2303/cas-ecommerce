@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
-use DD4You\Dpanel\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +22,10 @@ Route::controller(HomeController::class)->group(function () {
 
 Route::controller(AuthController::class)->group(function () {
     Route::get('/logout', 'logout')->name('logout');
-    Route::get('/login', 'login')->name('login');
-    Route::get('/register', 'register')->name('register');
+    Route::post('/login', 'login')->name('login');
+    Route::post('/register', 'register')->name('register');
+    Route::post('/forgot', 'forgot')->name('forgot');
+    Route::match(['GET', 'POST'], '/reset', 'reset')->name('reset');
 });
 
 // Route::view('/pd/slug', 'product_detail')->name('product_detail');
