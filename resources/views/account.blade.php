@@ -224,26 +224,28 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
 
-                        @foreach (range(1, 3) as $item)
+                        @foreach ($addresses as $item)
                             <div class="flex flex-col gap-1 p-2 rounded shadow bg-gray-100">
                                 <div class="flex justify-between items-center">
-                                    <p class="text-gray-800 font-medium">Vinay Sigh <small>(Home Address)</small></p>
-                                    <span class="text-gray-400 hover:text-violet-600 duration-300 cursor-pointer">
+                                    <p class="text-gray-800 font-medium">{{ $item->full_name }}
+                                        <small>({{ $item->tag }} Address)</small></p>
+                                    <a href="{{ route('address.edit', $item->id) }}"
+                                        class="text-gray-400 hover:text-violet-600 duration-300 cursor-pointer">
                                         <i class="bx bx-pencil"></i>Edit
-                                    </span>
+                                    </a>
                                 </div>
                                 <p class="text-gray-400 leading-5">
-                                    Railway Station,NH 28,Railway Colnony Gorakhpur, Uttar Pradesh - 273008
+                                    {{ $item->full_address }}
                                 </p>
-                                <p class="text-gray-600">Mobile No: +84 9090909</p>
+                                <p class="text-gray-600">Mobile No: +84 {{ $item->mobile_no }}</p>
                             </div>
                         @endforeach
 
-                        <div
+                        <a href="{{ route('address.create') }}"
                             class="flex flex-col items-center py-6 justify-center text-gray-400 gap-1 p-2 rounded shadow bg-gray-100">
                             <i class="bx bxs-plus-circle text-2xl"></i>
                             <p>Add New Address</p>
-                        </div>
+                        </a>
 
                     </div>
 

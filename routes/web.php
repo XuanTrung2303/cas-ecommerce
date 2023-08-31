@@ -30,6 +30,14 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(AccountController::class)->group(function () {
+
+    Route::prefix('account')->group(function () {
+        Route::get('address', 'newAddress')->name('address.create');
+        Route::post('address', 'newAddress')->name('address.store');
+        Route::get('address/{id}', 'editAddress')->name('address.edit');
+        Route::put('address/{id}', 'editAddress')->name('address.update');
+    });
+
     Route::get('account/', 'index')->name('account.index');
     Route::post('account/', 'index')->name('account.index');
 });
@@ -37,4 +45,4 @@ Route::controller(AccountController::class)->group(function () {
 // Route::view('/pd/slug', 'product_detail')->name('product_detail');
 Route::view('/cart', 'cart')->name('cart');
 Route::view('/wishlist', 'wishlist')->name('wishlist');
-Route::view('/account', 'account')->name('account');
+// Route::view('/account', 'account')->name('account');
