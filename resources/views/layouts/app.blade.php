@@ -156,6 +156,7 @@
     @vite('resources/js/app.js')
     <script src="{{ asset('dd4you/dpanel/js/cute-alert/cute-alert.js') }}"></script>
     <script src="{{ asset('dd4you/dpanel/js/jquery-3.6.1.min.js') }}"></script>
+    <script src="{{ asset('dd4you/dpanel/js/cart.js') }}"></script>
     <script>
         @if (Session::has('success'))
             cuteToast({

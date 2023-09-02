@@ -27,6 +27,39 @@
 
             document.getElementById('bigImage').src = arr[currentImage];
         }
+
+        const addToCart = () => {
+            let count = '{{ $product->variant->count() }}';
+            if (count != 1) {
+                cuteToast({
+                    type: 'info',
+                    message: 'Please select color & size'
+                })
+                return;
+            }
+
+            let variantId = '{{ $product->variant[0]->id }}'
+            if (!mCart.isInCart(variantId)) {
+                mCart.add(variantId, 1);
+                cuteToast({
+                    type: 'success',
+                    message: 'Added In Cart'
+                });
+            }
+            document.getElementById('add_to_cart_btn').innerHTML = 'Added In Cart';
+            return true;
+        }
+        const buyNow = () => {
+            if (addToCart) {
+                window.location.href = "{{ route('cart') }}";
+            }
+        }
+
+        @if ($product->variant->count() == 1)
+            let variantId = '{{ $product->variant[0]->id }}';
+
+            if (mCart.isInCart(variantId)) document.getElementById('add_to_cart_btn').innerHTML = 'Added In Cart';
+        @endif
     </script>
 @endpush
 
@@ -122,11 +155,13 @@
                         <i class='bx bx-heart text-2xl text-gray-500'></i>
                     </span>
                     <button
-                        class="border border-violet-600 rounded w-28 text-center drop-shadow font-medium text-violet-600 py-0.5">Add
+                        class="border border-violet-600 rounded w-28 text-center drop-shadow font-medium text-violet-600 py-0.5"
+                        onclick="addToCart()" id="add_to_cart_btn">Add
                         to Cart</button>
                     <button
-                        class="border border-violet-600 rounded w-28 text-center drop-shadow font-medium text-white bg-violet-600 py-0.5">Add
-                        to Cart</button>
+                        class="border border-violet-600 rounded w-28 text-center drop-shadow font-medium text-white bg-violet-600 py-0.5"
+                        onclick="buyNow()">Buy
+                        Now</button>
                 </div>
             </div>
             {{-- Right End  --}}
