@@ -158,9 +158,14 @@
 
                 </div>
 
-                @foreach (range(1, 12) as $item)
-                    <x-product.card1 />
+                @foreach ($products as $item)
+                    @if ($item->variant->isNotEmpty())
+                        <x-product.card1 :product="$item" />
+                    @endif
                 @endforeach
+                <div class="md:col-span-3">
+                    {{ $products->links() }}
+                </div>
             </div>
         </section>
     </section>

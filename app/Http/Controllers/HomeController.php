@@ -57,6 +57,20 @@ class HomeController extends Controller
         return view('product_detail', compact('products', 'product'));
     }
 
+    public function products()
+    {
+        $products = Product::with([
+            'image',
+            'variant' => function ($q) {
+                $q->with('color', 'size');
+            }
+        ])
+            ->withCount('image')
+            ->havingRaw('image_count > 0')
+            ->latest()->paginate(16);
+        return view('products', compact('products'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

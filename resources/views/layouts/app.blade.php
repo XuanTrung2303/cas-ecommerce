@@ -29,7 +29,7 @@
                 <button type="button" onclick="toggleLoginPopup()"><i class='bx bx-user'></i></button>
             @endauth
             <a href="{{ route('cart') }}"><i class='bx bx-cart'></i></a>
-            <span
+            <span id="cart_count_badge"
                 class="absolute top-0 -right-2.5 bg-indigo-600 rounded-full w-4 h-4 text-xs text-white text-center">0</span>
         </div>
     </div>
@@ -286,6 +286,15 @@
                 alert(error.response.data.msg);
             }
         }
+
+        const cartCount = () => {
+            let cartItems = mCart._getItems();
+            if (cartItems != null) {
+                document.getElementById('cart_count_badge').textContent = Object.keys(cartItems).length;
+            }
+            // cart_count_badge
+        }
+        cartCount();
     </script>
 
     @stack('scripts')

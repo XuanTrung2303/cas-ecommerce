@@ -63,6 +63,7 @@
                 });
             }
             document.getElementById('add_to_cart_btn').innerHTML = 'Added In Cart';
+            cartCount();
             return true;
         }
         const buyNow = () => {

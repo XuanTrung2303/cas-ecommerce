@@ -86,8 +86,7 @@
                 <h3 class="text-gray-800 font-medium underline mb-2">Best Seller</h3>
                 <h3 class="text-gray-800 font-medium mb-2">New Product</h3>
             </div>
-            {{-- {{ route('products') }} --}}
-            <a href="" class="text-violet-800 font-medium mb-2">All Product</a>
+            <a href="{{ route('products') }}" class="text-violet-800 font-medium mb-2">All Product</a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             @foreach ($products as $item)

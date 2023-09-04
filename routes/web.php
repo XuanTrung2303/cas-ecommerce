@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::controller(HomeController::class)->group(function () {
     Route::get('/', 'index')->name('landing-page');
     Route::get('/pd/{slug}', 'productDetail')->name('product_detail');
+    Route::get('/products', 'products')->name('products');
 });
 
 Route::controller(AuthController::class)->group(function () {
