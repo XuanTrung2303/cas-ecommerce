@@ -1,8 +1,24 @@
 @extends('layouts.app')
 
 @push('scripts')
+    <x-url-generator-js />
     <script>
         let currentImage = 0;
+        let color_id = '{{ request()->c ?? null }}';
+        let size_id = '{{ request()->s ?? null }}';
+
+        const selectColor = (cid) => {
+            c = color_id ? null : cid;
+            window.location.href = generateUrl({
+                c
+            })
+        }
+        const selectSize = (sid) => {
+            s = size_id ? null : sid;
+            window.location.href = generateUrl({
+                s
+            })
+        }
 
         const viewImage = (e, index) => {
 
@@ -120,8 +136,9 @@
                     <p class="text-gray-400">Colors:</p>
                     <div class="flex gap-1">
                         @foreach ($product->variant as $item)
-                            <span style="background-color: {{ $item->color->code }}"
-                                class="w-5 h-5 rounded-full">&nbsp;</span>
+                            <span onclick="selectColor('{{ $item->color->id }}')"
+                                style="background-color: {{ $item->color->code }}"
+                                class="w-5 h-5 cursor-pointer rounded-full">&nbsp;</span>
                         @endforeach
                     </div>
                 </div>
@@ -131,7 +148,7 @@
                     <p class="text-gray-400">Size:</p>
                     <div class="flex gap-1 text-gray-400 text-sm">
                         @foreach ($product->variant as $item)
-                            <span
+                            <span onclick="selectSize('{{ $item->size->id }}')"
                                 class="flex justify-center items-center w-5 h5 rounded-full border border-gray-400">{{ $item->size->code }}</span>
                         @endforeach
                     </div>
