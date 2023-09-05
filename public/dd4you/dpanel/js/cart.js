@@ -31,7 +31,7 @@ class ManageCart {
         return cartItems[product_variant_id];
     }
 
-    manageQty(product_variant_id, qty, stock) {
+    manageQty(e, product_variant_id, qty, stock) {
         let currentQty = this.getQty(product_variant_id) ?? 0;
         let newQty = currentQty + qty;
 
@@ -45,6 +45,12 @@ class ManageCart {
         if (newQty == 0) return;
 
         this.add(product_variant_id, qty);
+        e.parentElement.querySelector('span').textContent = newQty;
+
+        let pTag = e.parentElement.parentElement.previousElementSibling;
+        pTag.querySelector('.qty').textContent = newQty;
+        pTag.querySelector('.itemTotalPrice').textContent = pTag.querySelector('.itemPrice').textContent * newQty;
+        this.updatePrice();
     }
 
     isInCart(product_variant_id) {
@@ -73,6 +79,19 @@ class ManageCart {
 
     _getItems() {
         return JSON.parse(localStorage.getItem(this._key));
+    }
+
+    updatePrice() {
+        let subtotalElement = document.getElementById('subtotal');
+        let totalElement = document.getElementById('total');
+
+        let items = document.getElementById('itemContainer').querySelectorAll('.itemTotalPrice');
+        let subtotal = 0;
+        items.forEach(item => {
+            subtotal += parseFloat(item.textContent);
+        });
+        subtotalElement.textContent = subtotal;
+        totalElement.textContent = subtotal;
     }
 }
 

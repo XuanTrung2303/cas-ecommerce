@@ -30,14 +30,14 @@
                                     </p>
                                     <p>Size: ${item.size.code}</p>
                                 </div>
-                                <p class="text-black text-lg font-bold">
-                                    ${item.selling_price}x${qty} VND = <span class="font-bold">${item.selling_price*qty} VND</span>
+                                <p class="text-black text-lg">
+                                    <span class="itemPrice">${item.selling_price}</span> VND x <span class="qty">${qty}</span> = <span class="font-bold"><span class="itemTotalPrice">${item.selling_price*qty} </span> VND</span>
                                 </p>
                                 <div class="flex items-center gap-6">
                                     <div class="flex items-center justify-center gap-1">
-                                        <i onclick="mCart.manageQty('${item.id}', '-1', '${item.stock}')" class='text-gray-400 bx bx-minus-circle text-xl cursor-pointer'></i>
+                                        <i onclick="mCart.manageQty(this, '${item.id}', -1, '${item.stock}')" class='text-gray-400 bx bx-minus-circle text-xl cursor-pointer'></i>
                                         <span class="border border-slate-300 px-3 loading-none">${qty}</span>
-                                        <i onclick="mCart.manageQty('${item.id}', '1', '${item.stock}')" class='text-green-400 bx bx-plus-circle text-xl cursor-pointer'></i>
+                                        <i onclick="mCart.manageQty(this, '${item.id}', 1, '${item.stock}')" class='text-green-400 bx bx-plus-circle text-xl cursor-pointer'></i>
                                     </div>
                                     <button onClick="remoteItem(this, '${item.id}')" class="text-gray-400 uppercase">Remove</button>
                                 </div>
@@ -46,6 +46,7 @@
                     });
 
                     document.getElementById('itemContainer').innerHTML = html;
+                    mCart.updatePrice();
                 })
                 .catch((error) => {
                     cuteToast({
@@ -124,7 +125,7 @@
 
                     <div class="flex justify-between items-center">
                         <span class="text-gray-400">Subtotal</span>
-                        <span class="text-gray-800 font-bold">2.000.000 VND</span>
+                        <span class="text-gray-800 font-bold"><span id="subtotal">0</span> VND</span>
                     </div>
 
                     <div class="flex justify-between items-center">
@@ -138,7 +139,7 @@
                     </div>
                     <div class="mb-1 flex justify-between items-center">
                         <span class="text-gray-400">Total</span>
-                        <span class="text-gray-800 font-bold">1.500.000 VND</span>
+                        <span class="text-gray-800 font-bold"><span id="total">0</span> VND</span>
                     </div>
 
                     <div class="flex justify-between items-center bg-green-100 px-2 py-1 rounded-md">
