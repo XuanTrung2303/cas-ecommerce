@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserAddress;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -19,6 +20,14 @@ class CartController extends Controller
         }
 
         return view('cart', compact('addresses'));
+    }
+
+    public function apiCartProducts(Request $request)
+    {
+        $ids = explode(',', $request->ids);
+        $data = Variant::with('color:id,code', 'size:id,code', 'product:id,title', 'product.oldestImage')->whereIn('id', $ids)->get();
+
+        return response()->json($data);
     }
 
     /**
