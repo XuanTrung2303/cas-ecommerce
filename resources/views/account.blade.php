@@ -228,7 +228,8 @@
                             <div class="flex flex-col gap-1 p-2 rounded shadow bg-gray-100">
                                 <div class="flex justify-between items-center">
                                     <p class="text-gray-800 font-medium">{{ $item->full_name }}
-                                        <small>({{ $item->tag }} Address)</small></p>
+                                        <small>({{ $item->tag }} Address)</small>
+                                    </p>
                                     <a href="{{ route('address.edit', $item->id) }}"
                                         class="text-gray-400 hover:text-violet-600 duration-300 cursor-pointer">
                                         <i class="bx bx-pencil"></i>Edit

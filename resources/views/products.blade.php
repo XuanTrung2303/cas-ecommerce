@@ -190,11 +190,18 @@
 
                 </div>
 
-                @foreach ($products as $item)
+                @forelse ($products as $item)
                     @if ($item->variant->isNotEmpty())
                         <x-product.card1 :product="$item" />
                     @endif
-                @endforeach
+                @empty
+                    <div class="md:col-span-3 flex flex-col justify-center items-center gap-3">
+                        <img src="dd4you/dpanel/images/page-not-found.png" alt="">
+                        <h1 class="text-xl font-bold text-gray-800">Result Not Found!</h1>
+                        <p class="text-gray-400">Try to search with another query.</p>
+                    </div>
+                @endforelse
+
                 <div class="md:col-span-3">
                     {{ $products->links() }}
                 </div>
