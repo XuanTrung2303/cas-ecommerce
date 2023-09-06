@@ -7,6 +7,45 @@
             e.parentElement.parentElement.parentElement.remove();
         }
 
+        const applyCoupon = () => {
+            let discountCode = document.getElementById('discount_code');
+            if (discountCode.value == '' || discountCode.value.length == 0) return;
+
+            axios.post(`${window.location.href}/coupon`, {
+                    code: discountCode.value
+                })
+                .then((res) => {
+                    let coupon = res.data;
+                    let subtotal = mCart.getSubTotal();
+
+                    if (coupon.min_cart_amount != '' && coupon.min_cart_amount > subtotal) {
+                        cuteToast({
+                            type: "error",
+                            message: `Coupon Active above to ${coupon.min_cart_amount} VND Cart amount`,
+                        })
+                        return;
+                    }
+
+                    //Apply Coupon Code
+                    let discount = 0;
+                    if (coupon.type == 'Fixed') {
+                        discount = coupon.value;
+                    } else {
+                        discount = ((coupon.value / 100) * subtotal).toFixed(2);
+                    }
+                    document.getElementById('discount_amount').textContent = discount;
+                    document.getElementById('discount_msg').textContent = discount;
+                    document.getElementById('total').textContent = subtotal - discount;
+                })
+                .catch((error) => {
+                    discountCode.value = '';
+                    cuteToast({
+                        type: "error",
+                        message: error.response.data.message,
+                    })
+                })
+        }
+
         setTimeout(() => {
             let items = mCart._getItems();
             let ids = Object.keys(items);
@@ -117,9 +156,10 @@
                     <div class="relative mb-2 px-2 py-1.5 border border-slate-300 rounded-md">
                         <label class="absolute -top-3.5 left-5 text-slate-300 bg-white px-1">Discount Code</label>
                         <div class="flex justify-between">
-                            <input type="text" name="" placeholder="Enter Discount Code"
+                            <input type="text" name="discount_code" id="discount_code" placeholder="Enter Discount Code"
                                 class="w-full focus:outline-none">
-                            <button class="text-violet-600 font-medium">Apply</button>
+                            <button type="button" onclick="applyCoupon()"
+                                class="text-violet-600 font-medium">Apply</button>
                         </div>
                     </div>
 
@@ -134,8 +174,8 @@
                     </div>
 
                     <div class="mb-2 flex justify-between items-center">
-                        <span class="text-gray-400">Discount (25%)</span>
-                        <span class="text-violet-600 font-bold">500.000 VND</span>
+                        <span class="text-gray-400">Discount</span>
+                        <span class="text-violet-600 font-bold"><span id="discount_amount">0</span> VND</span>
                     </div>
                     <div class="mb-1 flex justify-between items-center">
                         <span class="text-gray-400">Total</span>
@@ -144,7 +184,7 @@
 
                     <div class="flex justify-between items-center bg-green-100 px-2 py-1 rounded-md">
                         <span class="text-green-500">Your total Savings amount on this order</span>
-                        <span class="text-green-500 font-bold">500.000 VND</span>
+                        <span class="text-green-500 font-bold"><span id="discount_msg">0</span> VND</span>
                     </div>
 
                     <button
